@@ -42,12 +42,6 @@ export default [
         i18n: 'Analytics'
       },
       {
-        url: '/QuickBalancing',
-        name: 'cxvcxvxcvxc',
-        slug: 'cxvcxvxvxvxccv',
-        i18n: 'xcvxcvxcvxcvxvc'
-      },
-      {
         url: '/dashboard/ecommerce',
         name: 'eCommerce',
         slug: 'dashboard-ecommerce',
@@ -91,12 +85,12 @@ export default [
       },
       {
         url: null,
-        name: 'Menu',
+        name: 'eCommerce',
         icon: 'ShoppingCartIcon',
-        i18n: 'Menu',
+        i18n: 'eCommerce',
         submenu: [
           {
-            url: '/apps/eCommerce/EEnricoShop',
+            url: '/apps/eCommerce/shop',
             name: 'Shop',
             slug: 'ecommerce-shop',
             i18n: 'Shop'

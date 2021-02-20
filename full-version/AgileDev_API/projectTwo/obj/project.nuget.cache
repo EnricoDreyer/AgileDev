@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "V55U4VLBhIwgugyfquoQtvHP31GF9jJFfVXi2GFt2+294dy4zvJ7DU2wlDAWxQCitRbkltE3PwuJnV16dOxXtw==",
+  "dgSpecHash": "1j0vQy6syxmRj2MRbWJsDHN1YlGHcvNVzqWdoZqqYJpdX7z/x3sTyNyEBzI5t8fJE+M9bmkUUNOLXlGGCfbp1A==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\fookwit\\full-version\\tookmits\\projectTwo\\projectTwo.csproj",
+  "projectFilePath": "C:\\Projects\\AgileDev\\full-version\\AgileDev_API\\projectTwo\\projectTwo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\EnricoIT\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\EnricoIT\\.nuget\\packages\\microsoft.aspnet.webapi\\5.2.7\\microsoft.aspnet.webapi.5.2.7.nupkg.sha512",

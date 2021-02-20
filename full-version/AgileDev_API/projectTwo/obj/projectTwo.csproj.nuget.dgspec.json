@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\fookwit\\full-version\\tookmits\\projectTwo\\projectTwo.csproj": {}
+    "C:\\Projects\\AgileDev\\full-version\\AgileDev_API\\projectTwo\\projectTwo.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\fookwit\\full-version\\tookmits\\projectTwo\\projectTwo.csproj": {
+    "C:\\Projects\\AgileDev\\full-version\\AgileDev_API\\projectTwo\\projectTwo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\fookwit\\full-version\\tookmits\\projectTwo\\projectTwo.csproj",
+        "projectUniqueName": "C:\\Projects\\AgileDev\\full-version\\AgileDev_API\\projectTwo\\projectTwo.csproj",
         "projectName": "projectTwo",
-        "projectPath": "C:\\Projects\\fookwit\\full-version\\tookmits\\projectTwo\\projectTwo.csproj",
+        "projectPath": "C:\\Projects\\AgileDev\\full-version\\AgileDev_API\\projectTwo\\projectTwo.csproj",
         "packagesPath": "C:\\Users\\EnricoIT\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\fookwit\\full-version\\tookmits\\projectTwo\\obj\\",
+        "outputPath": "C:\\Projects\\AgileDev\\full-version\\AgileDev_API\\projectTwo\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",

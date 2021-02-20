@@ -116,9 +116,9 @@ const router = new Router({
           }
         },
         {
-          path: '/apps/eCommerce/EEnricoShop',
+          path: '/apps/eCommerce/shop',
           name: 'ecommerce-shop',
-          component: () => import('./views/apps/eCommerce/EEnricoShop.vue'),
+          component: () => import('./views/apps/eCommerce/ECommerceShop.vue'),
           meta: {
             breadcrumb: [
               { title: 'Home', url: '/' },
@@ -1294,16 +1294,6 @@ const router = new Router({
         // =============================================================================
         // PAGES
         // =============================================================================
-        {
-          path: '/QuickBalancing',
-          name: 'QuickBalancing',
-          component: () => import('@/views/apps/eCommerce/EEnricoShop.vue'),
-          meta: {
-            title: 'QuickBalancing',
-            pageTitle: 'FAMS Quick Balancing view',
-            rule: 'editor'
-          },
-        },
         {
           path: '/callback',
           name: 'auth-callback',
