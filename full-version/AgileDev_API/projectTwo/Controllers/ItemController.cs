@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using projectTwo.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using projectTwo.Data;
+using projectTwo.DTOs;
 
 namespace projectTwo.Controllers
 {       
@@ -12,23 +14,17 @@ namespace projectTwo.Controllers
     public class ItemController : Controller
     {
         private readonly Context _context;
+        private readonly IItemService _itemService;
+
         public ItemController(Context context)
         {
             _context = context;
         }
 
         [HttpGet("getItemList")]
-        public ActionResult getItemList()
+        public List<ItemListDTO> getItemList()
         {
-            var items = _context.Item.Select(x => new
-            {
-                Id = x.Id,
-                Description = x.Description,
-                Price = (Double)x.Price
-             }).ToList();
-
-             return new JsonResult(items);
-            
+            return _itemService.getItem(); 
         }
     }
 }

@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-//using Fourty5.Core.DTOs;
-//using Fourty5.Core.Models;
-//using Fourty5.Core.Services;
+using projectTwo.DTOs;
 
-namespace Fourty5.Core.Interfaces
+namespace projectTwo.Interfaces
 {
     public interface IItemService
 	{
-        
+		List<ItemListDTO> getItem();
 	}
 }
