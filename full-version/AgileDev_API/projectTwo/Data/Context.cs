@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using projectTwo.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace projectTwo.Data
 {
@@ -15,6 +11,4 @@ namespace projectTwo.Data
         }
         public DbSet<Item> Item { get; set; }
     }
-
-
 }

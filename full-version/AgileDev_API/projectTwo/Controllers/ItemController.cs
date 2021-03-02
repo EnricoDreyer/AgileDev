@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using projectTwo.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using projectTwo.Data;
 using projectTwo.DTOs;
 
 namespace projectTwo.Controllers
 {       
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/Item")]
     public class ItemController : Controller
     {
-        private readonly Context _context;
         private readonly IItemService _itemService;
 
-        public ItemController(Context context)
+        public ItemController(IItemService itemService)
         {
-            _context = context;
+            _itemService = itemService;
         }
 
         [HttpGet("getItemList")]

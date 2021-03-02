@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using projectTwo.DTOs;
 using projectTwo.Data;
 
@@ -10,8 +9,12 @@ namespace projectTwo.Services
 {
     public class ItemService : IItemService
     {
-        private readonly IItemService _itemService;
         private readonly Context _context;
+
+        public ItemService(Context context)
+        {
+            _context = context;
+        }
 
         public List<ItemListDTO> getItem()
 		{
