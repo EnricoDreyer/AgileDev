@@ -55,16 +55,16 @@ namespace projectTwo
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Trevor Tredoux project 2",
-                    Description = "My First API",
+                    Title = "Enrico Dreyer",
+                    Description = "AgileDev API",
                     Contact = new OpenApiContact
                     {
-                        Name = "Trevor Tredoux",
-                        Email = "trevor998tredoux@gmail.com",
+                        Name = "Enrico Dreyer",
+                        Email = "enricodreyer04@gmail.com",
                     },
                     License = new OpenApiLicense
                     {
-                        Name = "TrevorTredoux",
+                        Name = "Enrico Dreyer",
                     }
                 });
 
