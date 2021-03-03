@@ -48,8 +48,10 @@ namespace projectTwo
                )
            );
             services.AddScoped<AuthService, AuthService>();
+            services.AddScoped<ItemService, ItemService>();
             services.AddScoped<HashThisService, HashThisService>();
             services.AddScoped<Context, Context>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
