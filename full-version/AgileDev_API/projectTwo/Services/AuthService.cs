@@ -13,6 +13,9 @@ using Microsoft.IdentityModel.Tokens;
 using projectTwo.Data;
 using projectTwo.Models;
 using Swashbuckle.Swagger;
+using projectTwo.DTOs;
+using projectTwo.Data;
+using projectTwo.Interfaces;
 
 namespace projectTwo.Services
 {

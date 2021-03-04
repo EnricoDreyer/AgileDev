@@ -26,6 +26,7 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using projectTwo.Data;
 using projectTwo.Services;
+using projectTwo.Interfaces;
 
 namespace projectTwo
 {
@@ -47,8 +48,8 @@ namespace projectTwo
                    Configuration1.GetConnectionString("DefaultConnection")
                )
            );
-            services.AddScoped<AuthService, AuthService>();
-            services.AddScoped<ItemService, ItemService>();
+            //services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IItemService, ItemService>();
             services.AddScoped<HashThisService, HashThisService>();
             services.AddScoped<Context, Context>();
 

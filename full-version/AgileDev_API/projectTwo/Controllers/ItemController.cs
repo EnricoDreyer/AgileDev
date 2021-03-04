@@ -6,7 +6,7 @@ using projectTwo.DTOs;
 namespace projectTwo.Controllers
 {       
     [ApiController]
-    [Route("api/Item")]
+    [Route("api/[controller]")]
     public class ItemController : Controller
     {
         private readonly IItemService _itemService;

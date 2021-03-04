@@ -1,0 +1,10 @@
+﻿using System.Collections.Generic;
+using projectTwo.DTOs;
+
+namespace projectTwo.Interfaces
+{
+    public interface IAuthService
+	{
+		
+	}
+}
