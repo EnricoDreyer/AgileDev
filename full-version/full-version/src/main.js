@@ -108,15 +108,45 @@ Vue.use(VueHammer)
 import 'prismjs'
 import 'prismjs/themes/prism-tomorrow.css'
 
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+
+// Import Bootstrap an BootstrapVue CSS files (order is important)
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+Vue.use(BootstrapVue)
 
 // Feather font icon
 require('./assets/css/iconfont.css')
 
+Vue.prototype.$VUE_APP_ROOT_API = 'https://localhost:44311/api';
+
+Vue.prototype.$buildUrl = function(path) {
+  return this.$VUE_APP_ROOT_API + "/" + path;
+}
 
 // Vue select css
 // Note: In latest version you have to add it separately
 // import 'vue-select/dist/vue-select.css';
 
+Vue.prototype.$getAccessToken = function () {
+  return localStorage.getItem("accessToken");
+}
+
+Vue.prototype.$getAccessToken = function () {
+  return localStorage.getItem("accessToken");
+}
+
+Vue.prototype.$getSiteId = function() {
+  if(localStorage.getItem('userSiteInfo') != ""){
+    if(JSON.parse(localStorage.getItem('userSiteInfo')) instanceof Array)
+      return JSON.parse(localStorage.getItem('userSiteInfo'))[0].siteId;
+    else 
+      return JSON.parse(localStorage.getItem('userSiteInfo')).siteId;
+  }
+  else
+    return 0;
+}
 
 Vue.config.productionTip = false
 
@@ -127,3 +157,248 @@ new Vue({
   acl,
   render: h => h(App)
 }).$mount('#app')
+
+
+Vue.prototype.$ajaxGet = function (self, myUrl, onSuccess, onFinally) {
+  var mySelf = this;
+  // var myAccessToken = mySelf.$getAccessToken().toString();
+  // var mySiteId = mySelf.$getSiteId();
+  return axios({
+    method: 'get',
+    url: mySelf.$buildUrl(myUrl),
+  //   headers: { 
+	// 	'Authorization': 'Bearer ' + myAccessToken, 
+	// 	'siteId': mySiteId 
+  // }
+  }).then(response => {
+    debugger
+    if (onSuccess && typeof onSuccess == "function")
+      onSuccess(response);
+  })
+    .catch(function (error) {
+      debugger
+      var exception = "";
+      var colour = "danger";
+      if (error.response) {
+        if (error.response.status == 401) {
+          exception = error.response.data.message;
+          colour = "warning";
+        } else if (error.response.status == 405) {
+          exception = error.response.data.message;
+          colour = "warning";
+        } else if (error.response.status == 498) {
+          localStorage.setItem("accessToken","");
+          router.push('/login');
+          exception = error.response.data.message;
+          colour = "warning";
+        } else if (error.response.status == 500) {
+          exception = error.response.data.message;
+          colour = "danger";
+        }
+      } else {
+        exception = error.message;
+        colour = "danger";
+      }
+      mySelf.$vs.notify({
+        time: 6000,
+        title: 'Error',
+        text: exception,
+        color: colour,
+        iconPack: 'feather',
+        icon: 'icon-alert-circle'
+      });
+    })
+    .finally(onFinally)
+}
+
+Vue.prototype.$ajaxGetAnon = function (self, myUrl, onSuccess, onFinally) {
+  var mySelf = this;
+  return axios({
+    method: 'get',
+    url: mySelf.$buildUrl(myUrl),
+   }).then(response => {
+    if (onSuccess && typeof onSuccess == "function")
+      onSuccess(response);
+  })
+    .catch(function (error) {
+      var exception = "";
+      var colour = "danger";
+      if (error.response) {
+        if (error.response.status == 401) {
+          exception = error.response.data.message;
+          colour = "warning";
+        } else if (error.response.status == 405) {
+          exception = error.response.data.message;
+          colour = "warning";
+        } else if (error.response.status == 498) {
+          localStorage.setItem("accessToken", "");
+          router.push('/login');
+          exception = error.response.data.message;
+          colour = "warning";
+        } else if (error.response.status == 500) {
+          exception = error.response.data.message;
+          colour = "danger";
+        }
+      } else {
+        exception = error.message;
+        colour = "danger";
+      }
+      mySelf.$vs.notify({
+        time: 6000,
+        title: 'Error',
+        text: exception,
+        color: colour,
+        iconPack: 'feather',
+        icon: 'icon-alert-circle'
+      });
+    })
+    .finally(onFinally);
+}
+
+Vue.prototype.$ajaxPost = function (self, myUrl, formData, onSuccess, onFinally) {
+  var mySelf = this;
+  // var myAccessToken = mySelf.$getAccessToken();
+  // var mySiteId = mySelf.$getSiteId();
+  return axios({
+    method: 'post',
+    url: mySelf.$buildUrl(myUrl),
+    data: formData,
+    headers: { 
+		// 'Authorization': 'Bearer ' + myAccessToken, 
+		// 'siteId': mySiteId 
+  }
+  }).then(response => {
+    if (onSuccess && typeof onSuccess == "function")
+      onSuccess(response);
+  })
+    .catch(function (error) {
+      var exception = "";
+      var colour = "danger";
+      if (error.response) {
+        if (error.response.status == 401) {
+          exception = error.response.data.message;
+          colour = "warning";
+        } else if (error.response.status == 405) {
+          exception = error.response.data.message;
+          colour = "warning";
+        } else if (error.response.status == 498) {
+          localStorage.setItem("accessToken", "");
+          router.push('/login');
+          exception = error.response.data.message;
+          colour = "warning";
+        } else if (error.response.status == 500) {
+          exception = error.response.data.message;
+          colour = "danger";
+        }
+      } else {
+        exception = error.message;
+        colour = "danger";
+      }
+      mySelf.$vs.notify({
+        time: 6000,
+        title: 'Error',
+        text: exception,
+        color: colour,
+        iconPack: 'feather',
+        icon: 'icon-alert-circle'
+      });
+    })
+    .finally(onFinally);
+}
+
+Vue.prototype.$ajaxPostAnon = function (self, myUrl, formData, onSuccess, onFinally, onError) {
+  var mySelf = this;
+  return axios({
+    method: 'post',
+    url: mySelf.$buildUrl(myUrl),
+    data: formData,
+  }).then(response => {
+    if (onSuccess && typeof onSuccess == "function")
+      onSuccess(response);
+  })
+    .catch(function (error) {
+      var exception = "";
+      var colour = "danger";
+      if (error.response) {
+        if (error.response.status == 401) {
+          exception = error.response.data.message;
+          colour = "warning";
+        } else if (error.response.status == 405) {
+          exception = error.response.data.message;
+          colour = "warning";
+        } else if (error.response.status == 498) {
+          localStorage.setItem("accessToken", "");
+          router.push('/login');
+          exception = error.response.data.message;
+          colour = "warning";
+        } else if (error.response.status == 500) {
+          exception = error.response.data.message;
+          colour = "danger";
+        }
+      } else {
+        exception = error.message;
+        colour = "danger";
+      }
+      mySelf.$vs.notify({
+        time: 6000,
+        title: 'Error',
+        text: exception,
+        color: colour,
+        iconPack: 'feather',
+        icon: 'icon-alert-circle'
+      });
+      onError(error);
+    })
+    .finally(onFinally);
+}
+
+Vue.prototype.$ajaxDelete = function (self, myUrl, onSuccess, onFinally) {
+  var mySelf = this;
+  // var myAccessToken = mySelf.$getAccessToken();
+  // var mySiteId = mySelf.$getSiteId();
+  return axios({
+    method: 'delete',
+    url: mySelf.$buildUrl(myUrl),
+    headers: { 
+		// 'Authorization': 'Bearer ' + myAccessToken, 
+		// 'siteId': mySiteId 
+  }
+  }).then(response => {
+    if (onSuccess && typeof onSuccess == "function")
+      onSuccess(response);
+  })
+    .catch(function (error) {
+      var exception = "";
+      var colour = "danger";
+      if (error.response) {
+        if (error.response.status == 401) {
+          exception = error.response.data.message;
+          colour = "warning";
+        } else if (error.response.status == 405) {
+          exception = error.response.data.message;
+          colour = "warning";
+        } else if (error.response.status == 498) {
+
+          localStorage.setItem("accessToken", "");
+          router.push('/login');
+          exception = error.response.data.message;
+          colour = "warning";
+        } else if (error.response.status == 500) {
+          exception = error.response.data.message;
+          colour = "danger";
+        }
+      } else {
+        exception = error.message;
+        colour = "danger";
+      }
+      mySelf.$vs.notify({
+        time: 6000,
+        title: 'Error',
+        text: exception,
+        color: colour,
+        iconPack: 'feather',
+        icon: 'icon-alert-circle'
+      });
+    })
+    .finally(onFinally);
+}
