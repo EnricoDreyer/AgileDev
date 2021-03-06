@@ -13,10 +13,12 @@ namespace projectTwo.Controllers
     public class ItemController : Controller
     {
         private readonly IItemService _itemService;
+        private readonly IAuthService _authService;
 
-        public ItemController(IItemService itemService)
+        public ItemController(IItemService itemService, IAuthService authService)
         {
             _itemService = itemService;
+            _authService = authService;
         }
 
         [HttpGet("getItemList")]
@@ -24,8 +26,7 @@ namespace projectTwo.Controllers
         public List<ItemListDTO> getItemList()
         {
 			try{
-                var temp = _itemService.getItem();
-                return temp;
+                return _itemService.getItem();
             }
 			catch (Exception ex)
             {

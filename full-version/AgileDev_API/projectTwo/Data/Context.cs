@@ -10,5 +10,6 @@ namespace projectTwo.Data
             
         }
         public DbSet<Item> Item { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }

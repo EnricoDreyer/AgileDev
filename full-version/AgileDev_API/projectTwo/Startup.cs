@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -27,6 +28,7 @@ using Owin;
 using projectTwo.Data;
 using projectTwo.Services;
 using projectTwo.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace projectTwo
 {
@@ -48,10 +50,6 @@ namespace projectTwo
                    Configuration1.GetConnectionString("DefaultConnection")
                )
            );
-            //services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<IItemService, ItemService>();
-            services.AddScoped<HashThisService, HashThisService>();
-            services.AddScoped<Context, Context>();
 
             services.AddSwaggerGen(c =>
             {
@@ -81,7 +79,13 @@ namespace projectTwo
                     .AllowAnyHeader()
                     .AllowAnyMethod();
             }));
-
+            services.AddMvc(o =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+                o.Filters.Add(new AuthorizeFilter(policy));
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -101,6 +105,11 @@ namespace projectTwo
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("LT69BabyKeyAuthor"))
                 };
             });
+
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<HashThisService, HashThisService>();
+            services.AddScoped<Context, Context>();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
