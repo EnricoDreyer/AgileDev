@@ -29,6 +29,7 @@ using projectTwo.Data;
 using projectTwo.Services;
 using projectTwo.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace projectTwo
 {
@@ -79,31 +80,13 @@ namespace projectTwo
                     .AllowAnyHeader()
                     .AllowAnyMethod();
             }));
-            services.AddMvc(o =>
-            {
-                var policy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
-                o.Filters.Add(new AuthorizeFilter(policy));
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(options =>
-            {
-                options.SaveToken = true;
-                options.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ValidateIssuerSigningKey = true,
 
-                    ValidIssuer = "TestForAthentication",
-                    ValidAudience = "TestForAthentication",
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("LT69BabyKeyAuthor"))
-                };
+            services.Configure<FormOptions>(options =>
+            {
+                options.MemoryBufferThreshold = Int32.MaxValue;
+                options.ValueLengthLimit = int.MaxValue;
+                options.MultipartBodyLengthLimit = int.MaxValue;
+                options.MultipartHeadersLengthLimit = int.MaxValue;
             });
 
             services.AddScoped<IAuthService, AuthService>();
@@ -114,7 +97,6 @@ namespace projectTwo
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
-            app.UseHttpsRedirection();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
                 {
@@ -123,10 +105,6 @@ namespace projectTwo
                 });
             app.UseRouting();
 
-
-
-            app.UseAuthentication();
-            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

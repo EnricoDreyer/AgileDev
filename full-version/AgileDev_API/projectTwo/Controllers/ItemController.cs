@@ -22,7 +22,6 @@ namespace projectTwo.Controllers
         }
 
         [HttpGet("getItemList")]
-        [AllowAnonymous]
         public List<ItemListDTO> getItemList()
         {
 			try{
