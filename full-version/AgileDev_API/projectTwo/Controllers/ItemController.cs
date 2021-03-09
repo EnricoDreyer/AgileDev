@@ -24,15 +24,7 @@ namespace projectTwo.Controllers
         [HttpGet("getItemList")]
         public ActionResult<string> getItemList()
         {
-			try{
-                return new JsonResult(_itemService.getItem());
-            }
-			catch (Exception ex)
-            {
-                //throw new ValidationException("To Reject the Formative Assessment you need a valid Signature uploaded to your profile.");
-
-                return null;
-			}
+            return new JsonResult(_itemService.getItem());
         }
     }
 }
