@@ -22,10 +22,10 @@ namespace projectTwo.Controllers
         }
 
         [HttpGet("getItemList")]
-        public List<ItemListDTO> getItemList()
+        public ActionResult<string> getItemList()
         {
 			try{
-                return _itemService.getItem();
+                return new JsonResult(_itemService.getItem());
             }
 			catch (Exception ex)
             {

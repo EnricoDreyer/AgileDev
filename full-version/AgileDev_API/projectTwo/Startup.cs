@@ -40,7 +40,9 @@ namespace projectTwo
         {
             Configuration1 = configuration;
         }
-       
+
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public IConfiguration Configuration1 { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -104,7 +106,7 @@ namespace projectTwo
 
                 });
             app.UseRouting();
-
+            app.UseCors("ApiCorsPolicy");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
