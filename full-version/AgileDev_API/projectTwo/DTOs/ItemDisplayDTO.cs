@@ -1,9 +1,8 @@
 ﻿using System;
-using projectTwo.DTOs;
 
 namespace projectTwo.DTOs
 {
-	public class ItemListDTO
+	public class ItemDisplayDTO
 	{
         public int Id { get; set; }
 		public string Description { get; set; }

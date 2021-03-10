@@ -25,11 +25,12 @@ using Microsoft.Owin.Security.DataHandler.Encoder;
 using Microsoft.Owin.Security.Jwt;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using projectTwo.DataBase;
+using projectTwo.Database;
 using projectTwo.Services;
 using projectTwo.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Features;
+using EntityConfigurationBase;
 
 namespace projectTwo
 {
@@ -48,7 +49,7 @@ namespace projectTwo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Context>(options =>
+            services.AddDbContext<ProjectTwoContext>(options =>
                options.UseSqlServer(
                    Configuration1.GetConnectionString("DefaultConnection")
                )
@@ -94,8 +95,10 @@ namespace projectTwo
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<IProjectTwoUnitOfWork, ProjectTwoUnitOfWork>();
             services.AddScoped<HashThisService, HashThisService>();
-            services.AddScoped<Context, Context>();
+            services.AddScoped<ProjectTwoContext, ProjectTwoContext>();
+
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using projectTwo.DataBase;
+using projectTwo.Database;
 using projectTwo.Interfaces;
 using projectTwo.Models;
 
@@ -9,9 +9,9 @@ namespace projectTwo.Database
 {
     public class Repository<T> : IRepository<T> where T : BaseModel
     {
-        private readonly Context _context;
+        private readonly ProjectTwoContext _context;
 
-        public Repository(Context context)
+        public Repository(ProjectTwoContext context)
         {
             _context = context;
         }

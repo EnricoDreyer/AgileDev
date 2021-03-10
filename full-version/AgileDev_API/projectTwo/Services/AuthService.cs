@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using projectTwo.DataBase;
+using projectTwo.Database;
 using projectTwo.Models;
 using Swashbuckle.Swagger;
 using projectTwo.DTOs;
@@ -20,11 +20,11 @@ namespace projectTwo.Services
 {
     public class AuthService : IAuthService
     {
-		private readonly Context _context;
+		private readonly ProjectTwoContext _projectTwoContext;
 		private readonly HashThisService _hashThis;
-		public AuthService(Context context, HashThisService hashThis)
+		public AuthService(ProjectTwoContext context, HashThisService hashThis)
 		{
-			_context = context;
+			_projectTwoContext = context;
 			_hashThis = hashThis;
 		}
 
@@ -33,7 +33,7 @@ namespace projectTwo.Services
 			var tokenHandler = new JwtSecurityTokenHandler();
 			var key = Encoding.ASCII.GetBytes("EnricoDreyerKeyAuthor");
 			var hash = _hashThis.GenHashCode(password);
-			var userExist = _context.User.Where(x => x.Password == hash && x.Email == email).Any();
+			var userExist = _projectTwoContext.User.Where(x => x.Password == hash && x.Email == email).Any();
 
 			if (userExist)
 			{

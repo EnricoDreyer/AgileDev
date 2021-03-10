@@ -3,22 +3,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using projectTwo.DTOs;
-using projectTwo.DataBase;
+using projectTwo.Database;
 
 namespace projectTwo.Services
 {
     public class UserService : IUserService
     {
-        private readonly Context _context;
+        private readonly ProjectTwoContext _projectTwoContext;
 
-        public UserService(Context context)
+        public UserService(ProjectTwoContext projectTwoContext)
         {
-            _context = context;
+            _projectTwoContext = projectTwoContext;
         }
 
         public UserInfoDTO getUserInfo()
 		{
-            var user = _context.User.Select(x => new UserInfoDTO
+            var user = _projectTwoContext.User.Select(x => new UserInfoDTO
             {
                 Id = x.Id,
                 RoleId = x.RoleId,

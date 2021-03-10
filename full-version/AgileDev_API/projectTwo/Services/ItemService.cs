@@ -3,27 +3,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using projectTwo.DTOs;
-using projectTwo.DataBase;
+using projectTwo.Database;
 
 namespace projectTwo.Services
 {
     public class ItemService : IItemService
     {
-        private readonly Context _context;
+        private readonly ProjectTwoContext _projectTwoContext;
+        private readonly IProjectTwoUnitOfWork _projectTwoUnitOfWork;
 
-        public ItemService(Context context)
+        public ItemService(ProjectTwoContext projectTwoContext, IProjectTwoUnitOfWork projectTwoUnitOfWork)
         {
-            _context = context;
+            _projectTwoContext = projectTwoContext;
+            _projectTwoUnitOfWork = projectTwoUnitOfWork;
         }
 
-        public List<ItemListDTO> getItem()
+        public List<ItemDisplayDTO> getItem()
 		{
-            var item = _context.Item.Select(x => new ItemListDTO
-            {
-                Id = x.Id,
-                Description = x.Description,
-                Price = (Double)x.Price,
-            }).ToList();
+            var item = _projectTwoUnitOfWork.Item.Query(x => x.Id == 1).Select(x => x.ItemDisplayDTO).ToList();
             
             return item;
         }

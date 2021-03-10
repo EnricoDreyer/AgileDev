@@ -3,26 +3,25 @@ using projectTwo.Models;
 using projectTwo.Database;
 using System.Collections.Generic;
 using System.Data;
-using projectTwo.DataBase;
 
 namespace EntityConfigurationBase
 {
 	public class ProjectTwoUnitOfWork : IProjectTwoUnitOfWork
 	{
-		private readonly Context _context;
+		private readonly ProjectTwoContext _context;
 
 		
 		private IRepository<User> _user;
 		private IRepository<Item> _item;
 
 
-		public ProjectTwoUnitOfWork(Context context)
+		public ProjectTwoUnitOfWork(ProjectTwoContext context)
 		{
 			_context = context;
 		}
 
-		public IRepository<User> Background => _user ?? (_user = new Repository<User>(_context));
-		public IRepository<Item> Character => _item ?? (_item = new Repository<Item>(_context));
+		public IRepository<User> User => _user ?? (_user = new Repository<User>(_context));
+		public IRepository<Item> Item => _item ?? (_item = new Repository<Item>(_context));
 
 		public void Save()
 		{

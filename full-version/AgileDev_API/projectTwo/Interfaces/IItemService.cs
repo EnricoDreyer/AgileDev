@@ -5,6 +5,6 @@ namespace projectTwo.Interfaces
 {
     public interface IItemService
 	{
-		List<ItemListDTO> getItem();
+		List<ItemDisplayDTO> getItem();
 	}
 }
