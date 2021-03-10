@@ -10,11 +10,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using projectTwo.Data;
+using projectTwo.DataBase;
 using projectTwo.Models;
 using Swashbuckle.Swagger;
 using projectTwo.DTOs;
-using projectTwo.Data;
 using projectTwo.Interfaces;
 
 namespace projectTwo.Services

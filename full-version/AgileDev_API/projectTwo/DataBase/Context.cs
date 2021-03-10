@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using projectTwo.Models;
 
-namespace projectTwo.Data
+namespace projectTwo.DataBase
 {
     public class Context : DbContext
     {

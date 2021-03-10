@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace projectTwo.Models
 {
-    public class Item
+    public class Item: BaseModel
     {
         [Key]
         public int Id { get; set; }

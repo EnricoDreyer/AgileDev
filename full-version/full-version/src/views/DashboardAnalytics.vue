@@ -314,7 +314,6 @@ export default {
     }
   },
   created () {
-
     var self = this;
     self.$store.dispatch("updateTheme", "dark");
 

@@ -25,7 +25,7 @@ using Microsoft.Owin.Security.DataHandler.Encoder;
 using Microsoft.Owin.Security.Jwt;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using projectTwo.Data;
+using projectTwo.DataBase;
 using projectTwo.Services;
 using projectTwo.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -92,6 +92,7 @@ namespace projectTwo
             });
 
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IItemService, ItemService>();
             services.AddScoped<HashThisService, HashThisService>();
             services.AddScoped<Context, Context>();
