@@ -15,6 +15,7 @@ using projectTwo.Models;
 using Swashbuckle.Swagger;
 using projectTwo.DTOs;
 using projectTwo.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace projectTwo.Services
 {
@@ -32,8 +33,8 @@ namespace projectTwo.Services
 		{
 			var tokenHandler = new JwtSecurityTokenHandler();
 			var key = Encoding.ASCII.GetBytes("EnricoDreyerKeyAuthor");
-			var hash = _hashThis.GenHashCode(password);
-			var userExist = _projectTwoContext.User.Where(x => x.Password == hash && x.Email == email).Any();
+			//var hash = _hashThis.GenHashCode(password);
+			var userExist = _projectTwoContext.User.Where(x => x.Password == password && x.Email == email).Any();
 
 			if (userExist)
 			{
@@ -51,7 +52,7 @@ namespace projectTwo.Services
 				if (mtoken == null) return new JsonResult("Not Valid User Login");
 				return new JsonResult(mtoken);
 			}
-			return new JsonResult("Not Valid User Login");
+			throw new ValidationException("User Not Valid");
 		}
 
 		private string GenerateJSONWebToken()

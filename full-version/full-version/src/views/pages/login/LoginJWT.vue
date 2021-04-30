@@ -40,8 +40,8 @@
 export default {
   data () {
     return {
-      email: 'admin@admin.com',
-      password: 'adminadmin',
+      email: '',
+      password: '',
       checkbox_remember_me: false
     }
   },
@@ -71,32 +71,17 @@ export default {
       return true
     },
     loginJWT () {
+      var self = this;
 
-      if (!this.checkLogin()) return
+      if (!self.checkLogin()) return
 
-      // Loading
-      this.$vs.loading()
+      var onSuccess = function (response) {
+        debugger
+        localStorage.setItem("accessToken", response.data.value)
+      };
 
-      const payload = {
-        checkbox_remember_me: this.checkbox_remember_me,
-        userDetails: {
-          email: this.email,
-          password: this.password
-        }
-      }
+      self.$ajaxGetAnon(self, "Auth/AuthUser?password=" + self.password + "&email=" + self.email, onSuccess);
 
-      this.$store.dispatch('auth/loginJWT', payload)
-        .then(() => { this.$vs.loading.close() })
-        .catch(error => {
-          this.$vs.loading.close()
-          this.$vs.notify({
-            title: 'Error',
-            text: error.message,
-            iconPack: 'feather',
-            icon: 'icon-alert-circle',
-            color: 'danger'
-          })
-        })
     },
     registerUser () {
       if (!this.checkLogin()) return

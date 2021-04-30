@@ -161,22 +161,20 @@ new Vue({
 
 Vue.prototype.$ajaxGet = function (self, myUrl, onSuccess, onFinally) {
   var mySelf = this;
-  // var myAccessToken = mySelf.$getAccessToken().toString();
+  var myAccessToken = mySelf.$getAccessToken().toString();
   // var mySiteId = mySelf.$getSiteId();
   return axios({
     method: 'get',
     url: mySelf.$buildUrl(myUrl),
-  //   headers: { 
-	// 	'Authorization': 'Bearer ' + myAccessToken, 
+      headers: { 
+	      'Authorization': 'Bearer ' + myAccessToken, 
 	// 	'siteId': mySiteId 
-  // }
+      }
   }).then(response => {
-    debugger
     if (onSuccess && typeof onSuccess == "function")
       onSuccess(response);
   })
     .catch(function (error) {
-      debugger
       var exception = "";
       var colour = "danger";
       if (error.response) {
@@ -257,14 +255,14 @@ Vue.prototype.$ajaxGetAnon = function (self, myUrl, onSuccess, onFinally) {
 
 Vue.prototype.$ajaxPost = function (self, myUrl, formData, onSuccess, onFinally) {
   var mySelf = this;
-  // var myAccessToken = mySelf.$getAccessToken();
+    var myAccessToken = mySelf.$getAccessToken();
   // var mySiteId = mySelf.$getSiteId();
   return axios({
     method: 'post',
     url: mySelf.$buildUrl(myUrl),
     data: formData,
     headers: { 
-		// 'Authorization': 'Bearer ' + myAccessToken, 
+		  'Authorization': 'Bearer ' + myAccessToken, 
 		// 'siteId': mySiteId 
   }
   }).then(response => {
@@ -354,13 +352,13 @@ Vue.prototype.$ajaxPostAnon = function (self, myUrl, formData, onSuccess, onFina
 
 Vue.prototype.$ajaxDelete = function (self, myUrl, onSuccess, onFinally) {
   var mySelf = this;
-  // var myAccessToken = mySelf.$getAccessToken();
+    var myAccessToken = mySelf.$getAccessToken();
   // var mySiteId = mySelf.$getSiteId();
   return axios({
     method: 'delete',
     url: mySelf.$buildUrl(myUrl),
     headers: { 
-		// 'Authorization': 'Bearer ' + myAccessToken, 
+		  'Authorization': 'Bearer ' + myAccessToken, 
 		// 'siteId': mySiteId 
   }
   }).then(response => {
