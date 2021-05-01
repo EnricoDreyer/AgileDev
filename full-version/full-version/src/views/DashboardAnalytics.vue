@@ -314,8 +314,13 @@ export default {
     }
   },
   created () {
+    var accesstoken = localStorage.getItem("accessToken");
+
+    if(!accesstoken){
+      this.$router.push('/pages/login');
+    }
+
     var self = this;
-    self.$store.dispatch("updateTheme", "dark");
 
     self.enricodata.name = 'Enrico Dreyer';
 

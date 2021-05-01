@@ -133,10 +133,6 @@ Vue.prototype.$getAccessToken = function () {
   return localStorage.getItem("accessToken");
 }
 
-Vue.prototype.$getAccessToken = function () {
-  return localStorage.getItem("accessToken");
-}
-
 Vue.prototype.$getSiteId = function() {
   if(localStorage.getItem('userSiteInfo') != ""){
     if(JSON.parse(localStorage.getItem('userSiteInfo')) instanceof Array)
