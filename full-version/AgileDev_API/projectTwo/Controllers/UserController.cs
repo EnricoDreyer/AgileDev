@@ -26,5 +26,11 @@ namespace projectTwo.Controllers
         {
             return new JsonResult(_userService.getUserInfo());
         }
+
+        [HttpPost("registerUser")]
+        public void registerUser(RegisterUserDTO registerUser)
+        {
+            _userService.registerUser(registerUser);
+        }
     }
 }

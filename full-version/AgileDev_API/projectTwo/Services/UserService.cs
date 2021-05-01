@@ -4,16 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using projectTwo.DTOs;
 using projectTwo.Database;
+using projectTwo.Models;
 
 namespace projectTwo.Services
 {
     public class UserService : IUserService
     {
         private readonly ProjectTwoContext _projectTwoContext;
+        private readonly IProjectTwoUnitOfWork _projectTwoUnitOfWork;
 
-        public UserService(ProjectTwoContext projectTwoContext)
+        public UserService(ProjectTwoContext projectTwoContext, IProjectTwoUnitOfWork projectTwoUnitOfWork)
         {
             _projectTwoContext = projectTwoContext;
+            _projectTwoUnitOfWork = projectTwoUnitOfWork;
         }
 
         public UserInfoDTO getUserInfo()
@@ -30,6 +33,24 @@ namespace projectTwo.Services
             }).SingleOrDefault();
 
             return user;
+        }
+
+        public void registerUser(RegisterUserDTO registerUser)
+        {
+            var userToSave = new User
+            {
+                RoleId = 1,
+                ClockNum = 1,
+                Name = registerUser.Name,
+                Surname = "Dreyer",
+                Email = registerUser.Email,
+                CellNumber = "0000000000",
+                Password = registerUser.Password,
+            };
+
+            _projectTwoUnitOfWork.User.Add(userToSave);
+
+            _projectTwoUnitOfWork.Save();
         }
     }
 }

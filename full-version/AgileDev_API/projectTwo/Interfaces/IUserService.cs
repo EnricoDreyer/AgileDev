@@ -6,5 +6,6 @@ namespace projectTwo.Interfaces
     public interface IUserService
 	{
 		UserInfoDTO getUserInfo();
+		void registerUser(RegisterUserDTO registerUser);
 	}
 }

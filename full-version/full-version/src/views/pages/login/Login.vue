@@ -142,7 +142,6 @@ export default {
       };
 
       self.$ajaxGetAnon(self, "Auth/AuthUser?password=" + self.password + "&email=" + self.email, onSuccess);
-
     },
     registerUser () {
       if (!this.checkLogin()) return
